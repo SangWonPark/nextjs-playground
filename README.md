@@ -6,8 +6,8 @@ https://nextjs.org/learn
 ### Overview
 Here's an overview of features you'll learn about in this course:
 
-- [ ] Styling: The different ways to style your application in Next.js.
-- [ ] Optimizations: How to optimize images, links, and fonts.
+- [x] Styling: The different ways to style your application in Next.js.
+- [x] Optimizations: How to optimize images, links, and fonts.
 - [ ] Routing: How to create nested layouts and pages using file-system routing.
 - [ ] Data Fetching: How to set up a Postgres database on Vercel, and best practices for fetching and streaming.
 - [ ] Search and Pagination: How to implement search and pagination using URL search params.

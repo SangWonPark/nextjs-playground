@@ -6,7 +6,6 @@ For more information, see the [course curriculum](https://nextjs.org/learn) on t
 
 ---
 
-## Memo
 ### Folder structure
 
 - /app: 애플리케이션의 모든 경로, 구성 요소 및 로직이 포함되어 있으며 대부분 이곳에서 작업하게 됩니다. 
@@ -64,3 +63,37 @@ export default function Page() {
 }
 ```
 
+---
+
+### Optimizing Fonts and Images
+
+### Why optimize fonts?
+
+글꼴은 웹사이트 디자인에서 중요한 역할을 하지만 프로젝트에서 사용자 정의 글꼴을 사용하면 글꼴 파일을 가져와 로드해야 하는 경우 성능에 영향을 줄 수 있습니다.
+
+누적 레이아웃 이동([Cumulative Layout Shift](https://vercel.com/blog/how-core-web-vitals-affect-seo))은 Google에서 웹사이트의 성능과 사용자 경험을 평가하는 데 사용하는 지표입니다. 글꼴의 경우 레이아웃 이동은 브라우저가 처음에 폴백 또는 시스템 글꼴로 텍스트를 렌더링한 다음 로드된 후 사용자 지정 글꼴로 교체할 때 발생합니다. 이 교체로 인해 텍스트 크기, 간격 또는 레이아웃이 변경되어 주변의 요소가 이동할 수 있습니다.
+
+Next.js는 next/font 모듈을 사용할 때 애플리케이션의 글꼴을 자동으로 최적화합니다. 빌드 시점에 글꼴 파일을 다운로드하여 다른 정적 에셋과 함께 호스팅합니다. 즉, 사용자가 애플리케이션을 방문할 때 성능에 영향을 줄 수 있는 글꼴에 대한 추가 네트워크 요청이 없습니다.
+
+(다른 정적 자산과 함께 글꼴 파일을 호스팅하므로 추가 네트워크 요청이 발생하지 않습니다.)
+
+**Adding a primary font**
+
+- `<body>` 에 폰트를 설정하면 모든 애플리케이션에 적용됩니다. (app/layout.tsx)
+
+**Practice: Adding a secondary font**
+
+- 필요한 요소마다 별도의 폰트 적용도 가능하다. (app/page.tsx, app/ui/acme-logo.tsx)
+
+### Why optimize images?
+
+이미지를 정적 에셋으로 관리할 수 있지만 아래와 같은 요구사항을 수동으로 처리해야한다.
+
+- Ensure your image is responsive on different screen sizes.
+- Specify image sizes for different devices.
+- Prevent layout shift as the images load.
+- Lazy load images that are outside the user's viewport.
+  
+___이미지 최적화는 그 자체로 하나의 전문 분야라고 할 수 있을 정도로 웹 개발에서 큰 주제입니다. 이러한 최적화를 수동으로 구현하는 대신 next/image 컴포넌트를 사용하여 이미지를 자동으로 최적화할 수 있습니다.___
+
+- Doc: [이미지 최적화에 대한 추가적인 문서](https://nextjs.org/learn/dashboard-app/optimizing-fonts-images#recommended-reading)
