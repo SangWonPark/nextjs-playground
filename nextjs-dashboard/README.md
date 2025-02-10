@@ -122,3 +122,26 @@ Next.js에서 레이아웃을 사용할 때의 한 가지 이점은 탐색 시 �
 app/layout.tsx 를 루트 레이아웃이라고 하며 모든 Next.js 애플리케이션에 필요합니다. 루트 레이아웃에 추가하는 모든 UI는 애플리케이션의 모든 페이지에서 공유됩니다. 루트 레이아웃을 사용하여 <html> 및 <body> 태그를 수정하고 메타데이터를 추가할 수 있습니다(메타데이터에 대한 자세한 내용은 이후 장에서 설명합니다).
 
 /app/dashboard/layout.tsx 대시보드 페이지에 고유하므로 위의 루트 레이아웃에 UI를 추가할 필요가 없습니다.
+
+---
+
+### Navigating Between Pages
+
+__Why optimize navigation?__
+
+To link between pages, you'd traditionally use the `<a>` HTML element. At the moment, the sidebar links use `<a>` elements, but notice what happens when you navigate between the home, invoices, and customers pages on your browser.
+
+Did you see it?
+
+There's a full page refresh on each page navigation!
+
+#### The `<Link>` component
+
+#### _Automatic code-splitting and prefetching_
+탐색 환경을 개선하기 위해 Next.js는 경로 세그먼트별로 애플리케이션을 자동으로 코드 분할합니다. 이는 브라우저가 초기 페이지 로드 시 모든 애플리케이션 코드를 로드하는 기존의 React SPA와는 다릅니다.
+
+경로별로 코드를 분할하면 페이지가 격리됩니다. 특정 페이지에서 오류가 발생해도 나머지 애플리케이션은 계속 작동합니다. 또한 브라우저에서 구문 분석할 코드가 줄어들어 애플리케이션의 속도가 빨라집니다.
+
+또한 프로덕션 환경에서 <링크> 컴포넌트가 브라우저의 뷰포트에 표시될 때마다 Next.js는 링크된 경로의 코드를 백그라운드에서 자동으로 프리피치합니다. 사용자가 링크를 클릭할 때쯤이면 대상 페이지의 코드가 이미 백그라운드에서 로드되어 있으므로 페이지 전환이 거의 즉각적으로 이루어집니다!
+
+내비게이션 작동 방식에 대해 자세히 알아보세요.
