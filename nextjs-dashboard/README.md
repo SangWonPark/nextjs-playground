@@ -41,3 +41,26 @@ const invoices = [
 ];
 ```
 데이터베이스 설정([setting up your database](https://nextjs.org/learn/dashboard-app/setting-up-your-database)) 장에서는 이 데이터를 사용하여 데이터베이스를 시드(초기 데이터로 채우기)합니다.
+
+---
+
+### CSS Styling
+
+global.css 를 정의하고, *Layout.tsx 에 정의해 레이아웃 별 스타일을 별도로 가져갈 수 있을 것으로 보인다.
+
+본 프로젝트에서는 tailwind 지시어를 사용해 스타일 지정하는 코드도 있는데, FrontEnd 개발자가 없는 상황에서는 CSS를 활용하는 것이 더 바람직해 보인다.
+```javascript
+import AcmeLogo from '@/app/ui/acme-logo';
+import { ArrowRightIcon } from '@heroicons/react/24/outline';
+import Link from 'next/link';
+ 
+export default function Page() {
+  return (
+    // These are Tailwind classes:
+    <main className="flex min-h-screen flex-col p-6">
+      <div className="flex h-20 shrink-0 items-end rounded-lg bg-blue-500 p-4 md:h-52">
+    // ...
+  )
+}
+```
+
