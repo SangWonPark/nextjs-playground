@@ -97,3 +97,28 @@ Next.js는 next/font 모듈을 사용할 때 애플리케이션의 글꼴을 자
 ___이미지 최적화는 그 자체로 하나의 전문 분야라고 할 수 있을 정도로 웹 개발에서 큰 주제입니다. 이러한 최적화를 수동으로 구현하는 대신 next/image 컴포넌트를 사용하여 이미지를 자동으로 최적화할 수 있습니다.___
 
 - Doc: [이미지 최적화에 대한 추가적인 문서](https://nextjs.org/learn/dashboard-app/optimizing-fonts-images#recommended-reading)
+
+---
+
+### Creating Layouts and Pages
+
+<Layout /> 컴포넌트는 자식 프로퍼티를 받습니다. 이 자식은 페이지 또는 다른 레이아웃일 수 있습니다. 귀하의 경우, /dashboard 내부의 페이지는 다음과 같이 <Layout /> 안에 자동으로 중첩됩니다:
+
+```
+app/
+  dashboard/
+  - layout.tsx  <- 대시보드 레이아웃
+  - page.tsx
+    customers/
+    - page.tsx
+    invoices/
+    - page.tsx
+- layout.tsx    <- 루트 레이아웃
+- page.tsx
+```
+
+Next.js에서 레이아웃을 사용할 때의 한 가지 이점은 탐색 시 페이지 컴포넌트만 업데이트되고 레이아웃은 다시 렌더링되지 않는다는 것입니다. 이를 부분 렌더링이라고 하며, 페이지 간 전환 시 레이아웃에서 클라이언트 측 React 상태를 유지합니다.
+
+app/layout.tsx 를 루트 레이아웃이라고 하며 모든 Next.js 애플리케이션에 필요합니다. 루트 레이아웃에 추가하는 모든 UI는 애플리케이션의 모든 페이지에서 공유됩니다. 루트 레이아웃을 사용하여 <html> 및 <body> 태그를 수정하고 메타데이터를 추가할 수 있습니다(메타데이터에 대한 자세한 내용은 이후 장에서 설명합니다).
+
+/app/dashboard/layout.tsx 대시보드 페이지에 고유하므로 위의 루트 레이아웃에 UI를 추가할 필요가 없습니다.
