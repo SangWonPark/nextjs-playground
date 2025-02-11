@@ -373,3 +373,32 @@ React에서는 `<form>` 엘리먼트의 `action` 속성을 사용하여 액션�
 이 장에서는 서버 액션을 사용하여 데이터를 변경하는 방법을 배웠습니다. 또한 `revalidatePath` API를 사용하여 Next.js 캐시를 재검증하고 `redirect`로 사용자를 새 페이지로 리디렉션하는 방법도 배웠습니다.
 
 _**추가 학습을 위해 '[서버 작업을 통한 보안](https://nextjs.org/blog/security-nextjs-server-components-actions)'에 대해 자세히 알아볼 수도 있습니다.**_
+
+---
+
+## Handling Error
+
+이전 장에서는 서버 액션을 사용하여 데이터를 변경하는 방법을 배웠습니다. 이번 장에서는 잡히지 않은 예외에 대해 JavaScript의 try/catch 문과 Next.js API를 사용하여 오류를 _우아하게_ 처리하는 방법을 살펴보겠습니다.
+
+`error.tsx` 파일은 경로 세그먼트의 UI 경계를 정의하는 데 사용할 수 있습니다. 이 파일은 예기치 않은 오류에 대한 **포괄적인 역할**을 하며 사용자에게 대체 UI를 표시할 수 있습니다.
+
+오류를 우아하게 처리할 수 있는 또 다른 방법은 `notFound` 함수를 사용하는 것입니다. `error.tsx`는 잡히지 않은 예외를 잡는 데 유용하지만, `notFound`는 존재하지 않는 리소스를 가져오려고 할 때 사용할 수 있습니다.
+
+```directory
+app/
+  dashboard/
+  - error.tsx << /dashboard/invoices/ 하위 페이지에서 에러 발생시 페이지 호출
+    invoices/
+      [id]/
+        edit/
+        - not-found.tsx  << /dashboard/invoices/{id}/edit 에서 notFound() 가 호출될 경우 페이지 호출
+```
+
+### Further reading
+
+Next.js의 오류 처리에 대해 자세히 알아보려면 다음 문서를 확인하세요:
+
+- [Error Handling](https://nextjs.org/learn/dashboard-app/error-handling#:~:text=the%20following%20documentation%3A-,Error%20Handling,-error.js%20API)
+- [`error.js` API Reference](https://nextjs.org/learn/dashboard-app/error-handling#:~:text=error.js%20API%20Reference)
+- [`notFound()` API Reference](https://nextjs.org/learn/dashboard-app/error-handling#:~:text=notFound()%20API%20Reference)
+- [`not-found.js` API Reference](https://nextjs.org/learn/dashboard-app/error-handling#:~:text=not%2Dfound.js%20API%20Reference)
