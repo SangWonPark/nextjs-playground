@@ -6,6 +6,8 @@ For more information, see the [course curriculum](https://nextjs.org/learn) on t
 
 ---
 
+## Getting Started
+
 ### Folder structure
 
 - /app: 애플리케이션의 모든 경로, 구성 요소 및 로직이 포함되어 있으며 대부분 이곳에서 작업하게 됩니다. 
@@ -43,7 +45,7 @@ const invoices = [
 
 ---
 
-### CSS Styling
+## CSS Styling
 
 global.css 를 정의하고, *Layout.tsx 에 정의해 레이아웃 별 스타일을 별도로 가져갈 수 있을 것으로 보인다.
 
@@ -65,7 +67,7 @@ export default function Page() {
 
 ---
 
-### Optimizing Fonts and Images
+## Optimizing Fonts and Images
 
 ### Why optimize fonts?
 
@@ -85,7 +87,7 @@ Next.js는 next/font 모듈을 사용할 때 애플리케이션의 글꼴을 자
 
 - 필요한 요소마다 별도의 폰트 적용도 가능하다. (app/page.tsx, app/ui/acme-logo.tsx)
 
-### Why optimize images?
+## Why optimize images?
 
 이미지를 정적 에셋으로 관리할 수 있지만 아래와 같은 요구사항을 수동으로 처리해야한다.
 
@@ -100,7 +102,7 @@ ___이미지 최적화는 그 자체로 하나의 전문 분야라고 할 수 �
 
 ---
 
-### Creating Layouts and Pages
+## Creating Layouts and Pages
 
 <Layout /> 컴포넌트는 자식 프로퍼티를 받습니다. 이 자식은 페이지 또는 다른 레이아웃일 수 있습니다. 귀하의 경우, /dashboard 내부의 페이지는 다음과 같이 <Layout /> 안에 자동으로 중첩됩니다:
 
@@ -125,7 +127,7 @@ app/layout.tsx 를 루트 레이아웃이라고 하며 모든 Next.js 애플리�
 
 ---
 
-### Navigating Between Pages
+## Navigating Between Pages
 
 __Why optimize navigation?__
 
@@ -148,7 +150,7 @@ There's a full page refresh on each page navigation!
 
 ---
 
-### Fetching Data
+## Fetching Data
 
 __Database queries__
 
@@ -175,3 +177,26 @@ __Using SQL__
 - SQL에 대한 기본적인 이해가 있으면 관계형 데이터베이스의 기본을 이해하는 데 도움이 되어 다른 도구에 지식을 적용할 수 있습니다.
 - SQL은 다용도로 사용할 수 있어 특정 데이터를 가져오고 조작할 수 있습니다.
 - `postgres.js` 라이브러리는 SQL 인젝션에 대한 보호 기능을 제공합니다.
+
+---
+
+## Static and Dynamic Rendering
+
+### What is Static Rendering?
+
+정적 렌더링을 사용하면 빌드 시(배포할 때) 또는 [데이터 재검증](https://nextjs.org/learn/dashboard-app/static-and-dynamic-rendering) 시 서버에서 데이터 가져오기 및 렌더링이 이루어집니다.
+
+사용자가 애플리케이션을 방문할 때마다 캐시된 결과가 제공됩니다. 정적 렌더링에는 몇 가지 이점이 있습니다:
+- **더 빠른 웹사이트** - 미리 렌더링된 콘텐츠를 Vercel과 같은 플랫폼에 배포하면 캐싱하여 전 세계에 배포할 수 있습니다. 이를 통해 전 세계 사용자가 웹사이트의 콘텐츠에 더 빠르고 안정적으로 액세스할 수 있습니다.
+- **서버 부하 감소** - 콘텐츠가 캐시되므로 서버가 각 사용자 요청에 대해 콘텐츠를 동적으로 생성할 필요가 없습니다. 따라서 컴퓨팅 비용을 절감할 수 있습니다.
+- **SEO** - 미리 렌더링된 콘텐츠는 페이지가 로드될 때 이미 콘텐츠를 사용할 수 있으므로 검색 엔진 크롤러가 색인을 생성하기가 더 쉽습니다. 이는 검색 엔진 순위 향상으로 이어질 수 있습니다.
+  
+정적 렌더링은 정적 블로그 게시물이나 제품 페이지와 같이 데이터가 없거나 사용자 간에 공유되는 데이터가 없는 UI에 유용합니다. 정기적으로 업데이트되는 개인화된 데이터가 있는 대시보드에는 적합하지 않을 수 있습니다.
+
+### What is Dynamic Rendering?
+
+동적 렌더링을 사용하면 요청 시(사용자가 페이지를 방문할 때) 각 사용자에 대한 콘텐츠가 서버에서 렌더링됩니다. 동적 렌더링에는 몇 가지 이점이 있습니다:
+- **실시간 데이터** - 동적 렌더링을 사용하면 애플리케이션에서 실시간 또는 자주 업데이트되는 데이터를 표시할 수 있습니다. 데이터가 자주 변경되는 애플리케이션에 이상적입니다.
+- **사용자별 콘텐츠** - 대시보드나 사용자 프로필과 같은 개인화된 콘텐츠를 제공하고 사용자 상호 작용에 따라 데이터를 업데이트하는 것이 더 쉬워집니다.
+- **요청 시간 정보** - 동적 렌더링을 사용하면 쿠키 또는 URL 검색 매개변수와 같이 요청 시점에만 알 수 있는 정보에 액세스할 수 있습니다.
+
