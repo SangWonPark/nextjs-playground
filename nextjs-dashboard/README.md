@@ -317,3 +317,32 @@ To recap, you've done a few things to optimize data fetching in your application
 6. Move data fetching down to the components that need it, thus isolating which parts of your routes should be dynamic.
 
 In the next chapter, we'll look at two common patterns you might need to implement when fetching data: search and pagination.
+
+---
+
+## Adding Search and Pagination
+
+이전 장에서는 스트리밍을 통해 대시보드의 초기 로딩 성능을 개선했습니다. 이제 `/invoices` 페이지로 이동하여 검색 및 페이지 매김을 추가하는 방법을 알아보겠습니다.
+
+### Why use URL search params?
+
+위에서 언급했듯이 URL 검색 매개변수를 사용하여 검색 상태를 관리하게 됩니다. 클라이언트 측 상태를 사용하는 데 익숙하다면 이 패턴이 생소할 수 있습니다.
+
+URL 매개변수로 검색을 구현하면 몇 가지 이점이 있습니다:
+- **북마크 및 공유 가능한 URL**: 검색 매개변수가 URL에 있으므로 사용자는 검색 쿼리 및 필터를 포함한 애플리케이션의 현재 상태를 북마크에 추가하여 나중에 참조하거나 공유할 수 있습니다.
+- **서버 측 렌더링**: URL 매개변수를 서버에서 직접 사용하여 초기 상태를 렌더링할 수 있으므로 서버 렌더링을 더 쉽게 처리할 수 있습니다.
+- **분석 및 추적**: URL에 검색 쿼리와 필터를 직접 넣으면 추가적인 클라이언트 측 로직 없이도 사용자 행동을 쉽게 추적할 수 있습니다.
+
+### Adding the search functionality
+
+다음은 검색 기능을 구현하는 데 사용할 Next.js 클라이언트 후크입니다:
+- `useSearchParams` - 현재 URL의 매개변수에 액세스할 수 있습니다. 예를 들어, 이 URL `/dashboard/invoices?page=1&query=pending`에 대한 검색 매개변수는 다음과 같습니다: `{page: '1', query: 'pending'}`.
+- `usePathname` - 현재 URL의 경로명을 읽을 수 있습니다. 예를 들어 `/dashboard/invoices` 경로의 경우, `usePathname`은 `'/dashboard/invoices'`를 반환합니다.
+- `useRouter` - 클라이언트 컴포넌트 내에서 프로그래밍 방식으로 경로를 탐색할 수 있습니다. 여러 가지 방법을 사용할 수 있습니다.
+
+Here's a quick overview of the implementation steps:
+1. Capture the user's input.
+2. Update the URL with the search params.
+3. Keep the URL in sync with the input field.
+4. Update the table to reflect the search query.
+
