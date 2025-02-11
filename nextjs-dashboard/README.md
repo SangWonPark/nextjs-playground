@@ -346,3 +346,30 @@ Here's a quick overview of the implementation steps:
 3. Keep the URL in sync with the input field.
 4. Update the table to reflect the search query.
 
+---
+
+## [Mutating Data](https://nextjs.org/learn/dashboard-app/mutating-data)
+
+이전 장에서는 URLSearchParams 와 Next.js API를 사용하여 검색 및 페이지 매김을 구현했습니다. 이제 송장 생성, 업데이트 및 삭제 기능을 추가하여 `/dashboard/invoices` 페이지에서 계속 작업해 보겠습니다.
+
+### What are Server Actions?
+
+React 서버 액션을 사용하면 서버에서 직접 비동기 코드를 실행할 수 있습니다. 데이터를 변경하기 위해 API 엔드포인트를 만들 필요가 없습니다. 대신 서버에서 실행되고 클라이언트 또는 서버 컴포넌트에서 호출할 수 있는 비동기 함수를 작성하면 됩니다.
+
+웹 애플리케이션은 다양한 위협에 취약할 수 있으므로 보안이 최우선 과제입니다. 이때 서버 액션이 필요합니다. 여기에는 암호화된 종료, 엄격한 입력 검사, 오류 메시지 해싱, 호스트 제한 등의 기능이 포함되어 있으며, 이 모든 기능이 함께 작동하여 애플리케이션 보안을 크게 강화합니다.
+
+### Using forms with Server Actions
+
+React에서는 `<form>` 엘리먼트의 `action` 속성을 사용하여 액션을 호출할 수 있습니다. 액션은 캡처된 데이터가 포함된 네이티브 FormData 객체를 자동으로 수신합니다.
+
+서버 컴포넌트 내에서 서버 액션을 호출할 때의 장점은 점진적인 성능 향상으로, 클라이언트에 자바스크립트가 아직 로드되지 않은 경우에도 양식이 작동합니다. 예를 들어 인터넷 연결 속도가 느려지지 않아도 됩니다.
+
+### Next.js with Server Actions
+
+서버 액션은 Next.js 캐싱과도 긴밀하게 통합되어 있습니다. 서버 액션을 통해 양식이 제출되면 해당 액션을 사용하여 데이터를 변경할 수 있을 뿐만 아니라 `revalidatePath` 및 `revalidateTag`와 같은 API를 사용하여 관련 캐시의 유효성을 다시 검사할 수도 있습니다.
+
+### Further reading
+
+이 장에서는 서버 액션을 사용하여 데이터를 변경하는 방법을 배웠습니다. 또한 `revalidatePath` API를 사용하여 Next.js 캐시를 재검증하고 `redirect`로 사용자를 새 페이지로 리디렉션하는 방법도 배웠습니다.
+
+_**추가 학습을 위해 '[서버 작업을 통한 보안](https://nextjs.org/blog/security-nextjs-server-components-actions)'에 대해 자세히 알아볼 수도 있습니다.**_
