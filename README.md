@@ -13,9 +13,9 @@ Here's an overview of features you'll learn about in this course:
 - [x] Search and Pagination: How to implement search and pagination using URL search params.
 - [x] Mutating Data: How to mutate data using React Server Actions, and revalidate the Next.js cache.
 - [x] Error Handling: How to handle general and 404 not found errors.
-- [ ] Form Validation and Accessibility: How to do server-side form validation and tips for improving accessibility.
-- [ ] Authentication: How to add authentication to your application using NextAuth.js and Middleware.
-- [ ] Metadata: How to add metadata and prepare your application for social sharing.
+- [x] Form Validation and Accessibility: How to do server-side form validation and tips for improving accessibility.
+- [x] Authentication: How to add authentication to your application using NextAuth.js and Middleware.
+- [x] Metadata: How to add metadata and prepare your application for social sharing.
 
 ### Prerequisite knowledge
 This course assumes you have a basic understanding of React and JavaScript. If you're new to React, we recommend going through our React Foundations course first to learn the fundamentals of React, such as components, props, state, and hooks, and newer features like Server Components and Suspense.
