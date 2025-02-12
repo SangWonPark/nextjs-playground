@@ -488,3 +488,9 @@ http://localhost:3000/dashboard/invoices/create 으로 이동하여 빈 양식�
 - 데이터를 데이터베이스로 보내기 전에 데이터가 예상되는 형식인지 확인하세요.
 - 클라이언트 측 유효성 검사를 우회하는 악의적인 사용자의 위험을 줄이세요.
 - 유효한 데이터로 간주되는 데이터에 대해 하나의 신뢰할 수 있는 출처를 확보하세요.
+
+---
+
+## [Adding Authentication](https://nextjs.org/learn/dashboard-app/adding-authentication)
+
+이전 장에서는 양식 유효성 검사를 추가하고 접근성을 개선하여 인보이스 경로 구축을 마쳤습니다. 이 장에서는 대시보드에 인증을 추가합니다.
