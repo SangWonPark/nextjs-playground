@@ -57,19 +57,21 @@ global.css 를 정의하고, *Layout.tsx 에 정의해 레이아웃 별 스타�
 
 본 프로젝트에서는 tailwind 지시어를 사용해 스타일 지정하는 코드도 있는데, FrontEnd 개발자가 없는 상황에서는 CSS를 활용하는 것이 더 바람직해 보인다.
 
-```javascript
+```typescript jsx
 import AcmeLogo from '@/app/ui/acme-logo';
-import {ArrowRightIcon} from '@heroicons/react/24/outline';
+import { ArrowRightIcon } from '@heroicons/react/24/outline';
 import Link from 'next/link';
 
 export default function Page() {
-	return (
-		// These are Tailwind classes:
-		<main className="flex min-h-screen flex-col p-6">
-			<div className="flex h-20 shrink-0 items-end rounded-lg bg-blue-500 p-4 md:h-52">
-				// ...
-				)
-				}
+    return (
+        // These are Tailwind classes:
+        <main className="flex min-h-screen flex-col p-6">
+            <div className="flex h-20 shrink-0 items-end rounded-lg bg-blue-500 p-4 md:h-52">
+                // ...
+            </div>
+        </main>
+    );
+}
 ```
 
 ---
@@ -97,7 +99,7 @@ Next.js는 next/font 모듈을 사용할 때 애플리케이션의 글꼴을 자
 
 - 필요한 요소마다 별도의 폰트 적용도 가능하다. (app/page.tsx, app/ui/acme-logo.tsx)
 
-## Why optimize images?
+### Why optimize images?
 
 이미지를 정적 에셋으로 관리할 수 있지만 아래와 같은 요구사항을 수동으로 처리해야한다.
 
@@ -402,3 +404,87 @@ Next.js의 오류 처리에 대해 자세히 알아보려면 다음 문서를 �
 - [`error.js` API Reference](https://nextjs.org/learn/dashboard-app/error-handling#:~:text=error.js%20API%20Reference)
 - [`notFound()` API Reference](https://nextjs.org/learn/dashboard-app/error-handling#:~:text=notFound()%20API%20Reference)
 - [`not-found.js` API Reference](https://nextjs.org/learn/dashboard-app/error-handling#:~:text=not%2Dfound.js%20API%20Reference)
+
+---
+
+## Improving Accessibility
+
+이전 장에서는 오류(404 오류 포함)를 포착하고 사용자에게 대체 방법을 표시하는 방법을 살펴봤습니다. 하지만 아직 퍼즐의 또 다른 조각인 양식 유효성 검사에 대해 논의해야 합니다. 서버 액션으로 서버 측 유효성 검사를 구현하는 방법과 접근성을 염두에 두고 React의 [`useActionState`](https://react.dev/reference/react/useActionState) 훅을 사용하여 양식 오류를 표시하는 방법을 살펴보겠습니다!
+
+### What is accessibility?
+
+접근성이란 장애인을 포함한 모든 사람이 사용할 수 있는 웹 애플리케이션을 설계하고 구현하는 것을 말합니다. 키보드 탐색, 시맨틱 HTML, 이미지, 색상, 동영상 등 다양한 영역을 포괄하는 방대한 주제입니다.
+
+이 강좌에서는 접근성에 대해 자세히 다루지는 않겠지만, Next.js에서 사용할 수 있는 접근성 기능과 애플리케이션의 접근성을 높이기 위한 몇 가지 일반적인 관행에 대해 설명합니다.
+
+접근성에 대해 자세히 알아보려면 [web.dev](https://nextjs.org/learn/dashboard-app/improving-accessibility#:~:text=Accessibility%20course%20by-,web.dev,-.)의 [접근성 배우기 과정](https://nextjs.org/learn/dashboard-app/improving-accessibility#:~:text=we%20recommend%20the-,Learn%20Accessibility,-course%20by%20web)을 추천합니다.
+
+### Using the ESLint accessibility plugin in Next.js
+
+Next.js는 접근성 문제를 조기에 발견할 수 있도록 ESLint 구성에 `eslint-plugin-jsx-a11y` 플러그인을 포함합니다. 예를 들어, 이 플러그인은 `alt`가 없는 이미지가 있거나 `aria-*` 및 `role` 속성을 잘못 사용하는 등의 경우 경고를 표시합니다.
+
+선택 사항으로, 이 기능을 사용해 보고 싶다면 `package.json` 파일에 `next lint`를 스크립트로 추가하세요:
+
+```json
+// package.json
+{
+  ...
+  "scripts": {
+    "build": "next build",
+    "dev": "next dev --turbopack",
+    "start": "next start",
+    "lint": "next lint" << run `pnpm lint` in your terminal
+  },
+  ...
+}
+```
+
+이제 `pnpm lint`를 실행하면 다음과 같은 출력이 표시됩니다:
+
+```terminal
+✔ No ESLint warnings or errors
+```
+
+### Improving form accessibility
+
+양식의 접근성을 개선하기 위해 이미 세 가지 작업을 진행하고 있습니다:
+
+- **Semantic HTML**: `<div>` 대신 시맨틱 요소(`<input>`, `<option>` 등)를 사용합니다. 이렇게 하면 보조 기술(AT)이 입력 요소에 집중하여 사용자에게 적절한 문맥 정보를 제공하므로 양식을 더 쉽게 탐색하고 이해할 수 있습니다.
+- **Labelling**: `<label>`과 `htmlFor` 속성을 포함하면 각 양식 필드에 설명 텍스트 레이블이 표시됩니다. 이렇게 하면 컨텍스트를 제공하여 AT 지원이 향상되고 사용자가 레이블을 클릭하여 해당 입력 필드에 집중할 수 있어 사용성이 향상됩니다.
+- **Focus Outline**: 필드가 초점이 맞춰지면 윤곽선이 표시되도록 적절한 스타일이 지정됩니다. 이는 페이지의 활성 요소를 시각적으로 표시하여 키보드 및 화면 리더 사용자가 양식의 현재 위치를 이해하는 데 도움이 되므로 접근성을 위해 매우 중요합니다. `tab`을 눌러 확인할 수 있습니다.
+
+이러한 관행은 많은 사용자가 양식에 더 쉽게 액세스할 수 있도록 하는 좋은 토대를 마련합니다. 하지만 양식 **유효성 검사** 및 **오류**를 해결하지는 못합니다.
+
+### [Form validation](https://nextjs.org/learn/dashboard-app/improving-accessibility#form-validation)
+
+http://localhost:3000/dashboard/invoices/create 으로 이동하여 빈 양식을 제출합니다. 어떻게 되나요?
+
+오류가 발생했습니다! 이는 빈 양식 값을 서버 액션으로 전송하기 때문입니다. 클라이언트 또는 서버에서 양식의 유효성을 검사하여 이를 방지할 수 있습니다.
+
+#### Client-Side validation
+
+클라이언트에서 양식의 유효성을 검사하는 방법에는 몇 가지가 있습니다. 가장 간단한 방법은 양식의 `<input>` 및 `<select>` 요소에 `required` 속성을 추가하여 브라우저에서 제공하는 양식 유효성 검사에 의존하는 것입니다. 예를 들어:
+
+```html
+<input
+  id="amount"
+  name="amount"
+  type="number"
+  placeholder="Enter USD amount"
+  className="peer block w-full rounded-md border border-gray-200 py-2 pl-10 text-sm outline-2 placeholder:text-gray-500"
+  required
+/>
+```
+
+양식을 다시 제출합니다. 빈 값으로 양식을 제출하려고 하면 브라우저에 경고가 표시됩니다.
+
+일부 AT는 브라우저 유효성 검사를 지원하므로 이 접근 방식은 일반적으로 괜찮습니다.
+
+클라이언트 측 유효성 검사의 대안은 서버 측 유효성 검사입니다. 다음 섹션에서 이를 구현하는 방법을 살펴보겠습니다.
+
+#### *[Server-Side validation](https://nextjs.org/learn/dashboard-app/improving-accessibility#server-side-validation)
+
+서버에서 양식의 유효성을 검사하면 다음과 같이 할 수 있습니다:
+- 데이터를 데이터베이스로 보내기 전에 데이터가 예상되는 형식인지 확인하세요.
+- 클라이언트 측 유효성 검사를 우회하는 악의적인 사용자의 위험을 줄이세요.
+- 유효한 데이터로 간주되는 데이터에 대해 하나의 신뢰할 수 있는 출처를 확보하세요.
