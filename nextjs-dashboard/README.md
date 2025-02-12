@@ -494,3 +494,66 @@ http://localhost:3000/dashboard/invoices/create 으로 이동하여 빈 양식�
 ## [Adding Authentication](https://nextjs.org/learn/dashboard-app/adding-authentication)
 
 이전 장에서는 양식 유효성 검사를 추가하고 접근성을 개선하여 인보이스 경로 구축을 마쳤습니다. 이 장에서는 대시보드에 인증을 추가합니다.
+
+---
+
+## [Adding Metadata](https://nextjs.org/learn/dashboard-app/adding-metadata)
+
+메타데이터는 SEO와 공유 가능성을 위해 매우 중요합니다. 이 장에서는 Next.js 애플리케이션에 메타데이터를 추가하는 방법에 대해 설명합니다.
+
+### Types of metadata
+
+**제목 메타데이터**: 브라우저 탭에 표시되는 웹페이지의 제목을 담당합니다. 검색 엔진이 웹페이지의 내용을 이해하는 데 도움이 되므로 SEO에 매우 중요합니다.
+```typescript jsx
+<title>Page Title</title>
+```
+
+**설명 메타데이터**: 이 메타데이터는 웹페이지 콘텐츠에 대한 간략한 개요를 제공하며 검색 엔진 결과에 표시되는 경우가 많습니다.
+```typescript jsx
+<meta name="description" content="A brief description of the page content." />
+```
+
+**키워드 메타데이터**: 이 메타데이터에는 웹페이지 콘텐츠와 관련된 키워드가 포함되어 검색 엔진이 페이지 색인을 생성하는 데 도움이 됩니다.
+```typescript jsx
+<meta name="keywords" content="keyword1, keyword2, keyword3" />
+```
+
+**오픈 그래프 메타데이터**(Open Graph Metadata): 이 메타데이터는 소셜 미디어 플랫폼에서 공유할 때 웹페이지가 표시되는 방식을 개선하여 제목, 설명 및 미리보기 이미지와 같은 정보를 제공합니다.
+```typescript jsx
+<meta property="og:title" content="Title Here" />
+<meta property="og:description" content="Description Here" />
+<meta property="og:image" content="image_url_here" />
+```
+
+**파비콘 메타데이터**: 이 메타데이터는 브라우저의 주소 표시줄 또는 탭에 표시되는 파비콘(작은 아이콘)을 웹페이지로 연결합니다.
+```typescript jsx
+<link rel="icon" href="path/to/favicon.ico" />
+```
+
+### Adding metadata
+
+Next.js에는 애플리케이션 메타데이터를 정의하는 데 사용할 수 있는 메타데이터 API가 있습니다. 애플리케이션에 메타데이터를 추가하는 방법에는 두 가지가 있습니다:
+- **Config-based**: 정적 메타데이터 객체 또는 동적 생성 메타데이터 함수를 layout.js 또는 page.js 파일로 내보냅니다.
+- **File-based**: Next.js에서는 메타데이터 용도로 특별히 사용되는 다양한 특수 파일들이 있습니다.
+  - `favicon.ico`, `apple-icon.jpg` 및 `icon.jpg`: 파비콘 및 아이콘에 활용됩니다.
+  - `opengraph-image.jpg` 및 `twitter-image.jpg`: 소셜 미디어 이미지에 사용됩니다.
+  - `robots.txt`: 검색 엔진 크롤링에 대한 지침을 제공합니다.
+  - `sitemap.xml`: 웹사이트의 구조에 대한 정보를 제공합니다.
+
+이러한 파일을 정적 메타데이터에 유연하게 사용하거나 프로젝트 내에서 프로그래밍 방식으로 생성할 수 있습니다.
+
+이 두 가지 옵션을 모두 사용하면 Next.js가 페이지의 관련 `<head>` 요소를 자동으로 생성합니다.
+
+### Favicon and Open Graph image
+
+`/app` 에 `favicon.ico` 과 `opengraph-image.jpg`를 위치시키면 Next.js가 자동으로 파일을 식별해 파비콘 및 OG 이미지로 사용합니다.
+
+### Page title and descriptions
+
+`layout.js` 또는 `page.js` 파일에서 [`metadata` 객체](https://nextjs.org/docs/app/api-reference/functions/generate-metadata#metadata-fields)를 포함시켜 제목 및 설명과 같은 추가 페이지 정보를 추가할 수도 있습니다. `layout.js`의 모든 메타데이터는 이를 사용하는 모든 페이지에서 상속됩니다.
+
+Next.js 메타데이터 API는 강력하고 유연하여 애플리케이션의 메타데이터를 완벽하게 제어할 수 있습니다. 여기에서는 몇 가지 기본 메타데이터를 추가하는 방법을 보여드렸지만 `keyword`, `robot`, `canonical` 등 여러 필드를 추가할 수 있습니다. 자유롭게 [문서](https://nextjs.org/learn/dashboard-app/adding-metadata#:~:text=to%20explore%20the-,documentation,-%2C%20and%20add%20any)를 살펴보고 애플리케이션에 원하는 추가 메타데이터를 추가하세요.
+
+---
+
+## [Next Steps...](https://nextjs.org/learn/dashboard-app/next-steps)
