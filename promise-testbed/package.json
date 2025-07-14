@@ -1,0 +1,25 @@
+{
+  "name": "promise-testbed",
+  "version": "1.0.0",
+  "description": "Promise.all과 Promise.allSettled 테스트베드",
+  "main": "index.js",
+  "scripts": {
+    "test:basic": "tsx src/basic-promise-test.ts",
+    "test:advanced": "tsx src/advanced-promise-test.ts", 
+    "test:real-world": "tsx src/real-world-scenarios.ts",
+    "test:performance": "tsx src/performance-comparison.ts",
+    "test:all": "tsx src/comprehensive-test.ts",
+    "dev": "tsx watch src/comprehensive-test.ts"
+  },
+  "keywords": ["promise", "async", "testing", "javascript", "typescript"],
+  "author": "박상원",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.0"
+  },
+  "dependencies": {
+    "chalk": "^5.3.0"
+  }
+}
